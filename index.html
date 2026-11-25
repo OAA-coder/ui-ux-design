@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Между строк — Книжный магазин</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="header">
+    <div class="container header__inner">
+      <a href="#" class="header__logo" onclick="showPage('home'); return false;">
+        между строк
+        <span>книжный магазин</span>
+      </a>
+      <nav class="header__nav">
+        <a href="#" class="active" onclick="showPage('home'); return false;">Главная</a>
+        <a href="#" onclick="showPage('catalog'); return false;">Каталог</a>
+        <a href="#">Подборки</a>
+        <a href="#">О проекте</a>
+      </nav>
+      <div class="header__icons">
+        <button class="icon-btn">🔍</button>
+        <button class="icon-btn" id="fav-filter-btn">♥ <span id="fav-count">0</span></button>
+        <button class="icon-btn" onclick="showPage('profile'); return false;">👤</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- ЭКРАН 1: ГЛАВНАЯ -->
+    <div id="page-home" class="page" style="display: block;">
+      <section class="hero">
+        <div class="hero__content">
+          <h1>Ваша следующая любимая книга.</h1>
+          <p>Большие истории начинаются с любопытства. Находите книги, открывайте авторов, читайте своё.</p>
+          <button class="hero__btn" onclick="showPage('catalog'); return false;">Найти свою книгу →</button>
+        </div>
+        <div class="hero__images">
+          <img src="https://covers.openlibrary.org/b/id/10523571-L.jpg" alt="Книга 1">
+          <img src="https://covers.openlibrary.org/b/id/8739161-L.jpg" alt="Книга 2">
+          <img src="https://covers.openlibrary.org/b/id/10769019-L.jpg" alt="Книга 3">
+        </div>
+      </section>
+
+      <section class="catalog">
+        <div class="catalog__header">
+          <h2>Хочется прочитать</h2>
+          <a href="#" onclick="showPage('catalog'); return false;">Весь каталог →</a>
+        </div>
+        <div class="grid" id="books-grid-home">
+          <!-- Карточки главной -->
+        </div>
+      </section>
+    </div>
+
+    <!-- ЭКРАН 2: КАТАЛОГ -->
+    <div id="page-catalog" class="page" style="display: none;">
+      <h1 class="catalog-title">Книжная полка без границ</h1>
+      <p class="catalog-subtitle">Ищите по названию, автору или ISBN — мы найдём вашу книгу.</p>
+      
+      <div class="search-bar">
+        <input type="text" id="search-input" placeholder="Название, автор или ISBN" class="search-input">
+        <button class="hero__btn">Найти →</button>
+      </div>
+
+      <div class="catalog-layout">
+        <aside class="filters">
+          <h3>Фильтры</h3>
+          <p>Жанр</p>
+          <label><input type="checkbox"> Классика</label>
+          <label><input type="checkbox"> Фантастика</label>
+          <label><input type="checkbox"> Фэнтези</label>
+          <label><input type="checkbox"> Современная проза</label>
+          <p>Язык издания</p>
+          <label><input type="checkbox"> Русский</label>
+          <label><input type="checkbox" checked> Английский</label>
+        </aside>
+        <div class="grid" id="books-grid-catalog">
+          <!-- Карточки каталога -->
+        </div>
+      </div>
+    </div>
+
+    <!-- ЭКРАН 3: ДЕТАЛЬНАЯ СТРАНИЦА -->
+    <div id="page-book" class="page" style="display: none;">
+      <a href="#" onclick="showPage('catalog'); return false;" class="back-link">← К каталогу</a>
+      
+      <div class="book-detail">
+        <div class="book-detail__image">
+          <img src="https://covers.openlibrary.org/b/id/10523571-L.jpg" alt="Обложка">
+        </div>
+        <div class="book-detail__info">
+          <span class="card__category">Классика</span>
+          <h1>Гордость и предубеждение</h1>
+          <p class="book-detail__author">Джейн Остин</p>
+          
+          <div class="book-detail__price">690 ₽</div>
+          <p style="color: #666; font-size: 14px; margin-bottom: 24px;">Бумажная книга · мягкая обложка</p>
+          
+          <button class="hero__btn" style="width: 100%; justify-content: center; margin-bottom: 12px;">В корзину</button>
+          <button class="btn-outline">♡ В избранное</button>
+          
+          <div class="book-detail__description">
+            <h3>О книге</h3>
+            <p>Элизабет Беннет не спешит верить первому впечатлению. Но встреча с мистером Дарси испытывает её убеждения — и заставляет по-новому взглянуть на любовь и гордость.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ЭКРАН 4: ЛИЧНЫЙ КАБИНЕТ (ПРОФИЛЬ) -->
+    <div id="page-profile" class="page" style="display: none;">
+      <div class="breadcrumbs">ЛИЧНЫЙ КАБИНЕТ</div>
+      <h1 class="catalog-title">Ваш читательский уголок</h1>
+      <p class="catalog-subtitle">Пусть хорошие книги находят вас.</p>
+
+      <div class="profile-layout">
+        <aside class="profile-sidebar">
+          <nav class="profile-nav">
+            <a href="#" class="active">Личные данные <span>01</span></a>
+            <a href="#">Моя полка <span>03</span></a>
+            <a href="#">Мои заказы <span>02</span></a>
+            <a href="#">Настройки</a>
+          </nav>
+          <a href="#" class="logout-link">Выйти из аккаунта →</a>
+        </aside>
+
+        <div class="profile-content">
+          <h2>Личные данные</h2>
+          <p class="profile-hint">Только нужное — для заказов и книжных рекомендаций.</p>
+
+          <form class="profile-form">
+            <div class="form-row">
+              <div class="form-group">
+                <label>Имя</label>
+                <input type="text" value="Анна">
+              </div>
+              <div class="form-group">
+                <label>Фамилия</label>
+                <input type="text" value="Соколова">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Электронная почта</label>
+              <input type="email" value="anna.sokolova@example.com">
+              <span class="input-hint">На этот адрес придут подтверждения заказов.</span>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label>Город</label>
+                <select><option>Москва</option></select>
+              </div>
+              <div class="form-group">
+                <label>Язык изданий</label>
+                <select><option>Английский</option></select>
+              </div>
+            </div>
+
+            <h2 style="margin-top: 48px;">Книжная почта</h2>
+            
+            <div class="toggle-row">
+              <div>
+                <strong>Персональные рекомендации</strong>
+                <p class="input-hint">Подборки по вашим любимым жанрам — раз в неделю.</p>
+              </div>
+              <div class="toggle active"></div>
+            </div>
+
+            <div class="toggle-row">
+              <div>
+                <strong>Новости и специальные предложения</strong>
+                <p class="input-hint">Редкие издания, новинки и приятные скидки.</p>
+              </div>
+              <div class="toggle"></div>
+            </div>
+
+            <div class="form-actions">
+              <button type="button" class="hero__btn">Сохранить изменения</button>
+              <button type="button" class="btn-text">Отменить</button>
+            </div>
+          </form>
+        </div>
+
+        <aside class="profile-saved">
+          <h3>Отложено на потом</h3>
+          <p class="input-hint" style="margin-bottom: 24px;">3 книги ждут своего момента</p>
+          
+          <div class="saved-book">
+            <img src="https://covers.openlibrary.org/b/id/10523571-S.jpg" alt="Книга">
+            <div>
+              <strong>Гордость и предубеждение</strong>
+              <span>Джейн Остин</span>
+            </div>
+          </div>
+          <div class="saved-book">
+            <img src="https://covers.openlibrary.org/b/id/8739161-S.jpg" alt="Книга">
+            <div>
+              <strong>Дюна</strong>
+              <span>Фрэнк Герберт</span>
+            </div>
+          </div>
+          <a href="#" class="saved-link">Открыть мою полку →</a>
+          
+          <p class="privacy-note">
+            <strong>Ваши данные — только ваши</strong><br>
+            Используем их для вашего удобства и не передаём третьим лицам.
+          </p>
+        </aside>
+      </div>
+    </div>
+  </main>
+
+  <!-- Скрипт для переключения страниц и активного меню -->
+  <script>
+    window.showPage = function(pageName) {
+      // Скрываем все страницы
+      document.querySelectorAll('.page').forEach(p => p.style.display = 'none');
+      
+      // Показываем нужную
+      const targetPage = document.getElementById('page-' + pageName);
+      if (targetPage) targetPage.style.display = 'block';
+      
+      // Убираем активный класс со всех ссылок
+      document.querySelectorAll('.header__nav a').forEach(a => a.classList.remove('active'));
+      
+      // Добавляем активный класс нужной ссылке
+      const activeLink = document.querySelector(`.header__nav a[onclick*="'${pageName}'"]`);
+      if (activeLink) activeLink.classList.add('active');
+      
+      // Прокрутка наверх
+      window.scrollTo(0, 0);
+
+      // Если перешли в каталог — отправляем событие для рендера карточек
+      if (pageName === 'catalog') {
+        window.dispatchEvent(new Event('renderCatalog'));
+      }
+    };
+  </script>
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>
